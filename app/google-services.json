@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1019950813571",
+    "firebase_url": "https://parkhapa-0.firebaseio.com",
+    "project_id": "parkhapa-0",
+    "storage_bucket": "parkhapa-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019950813571:android:916bb811a84e7b9d",
+        "android_client_info": {
+          "package_name": "com.abdul.hackathon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019950813571-tlio54rgjj1o9g6jg3j1qtk9orvb29f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.abdul.hackathon",
+            "certificate_hash": "1fa6bf8c790378b80b58a66cb938f95984c38939"
+          }
+        },
+        {
+          "client_id": "1019950813571-p0tb4mldpfg8drrpfsupvtlhkddqsm67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWLc_IZaDGeZfmYMgAzReyQ9eznzzDpOg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019950813571-p0tb4mldpfg8drrpfsupvtlhkddqsm67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
