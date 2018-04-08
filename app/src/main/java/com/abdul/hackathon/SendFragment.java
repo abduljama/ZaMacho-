@@ -28,6 +28,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
+import transportapisdk.JourneyBodyOptions;
+import transportapisdk.TransportApiClient;
+import transportapisdk.TransportApiClientSettings;
+import transportapisdk.TransportApiResult;
+import transportapisdk.models.Journey;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,11 +44,14 @@ public class SendFragment extends Fragment  implements PlaceSelectionListener {
 
     private static final String KEY ="taecP4HPL6NMiUdoXFQyVQc8gLp2" ;
     PlaceAutocompleteFragment autocompleteFragment1 , autocompleteFragment2 ;
-
+    String clientId = "c7b0138f-c9b2-4998-9e71-b053f2601684";
+    String clientSecret = "wI81vUJNPoQMzz00kO9vt3t2lN+T05QRnxZsvu50+/w=";
 
     private DatabaseReference mDatabase;
 
     private TextView mPlaceDetailsText;
+
+    TransportApiClient defaultClient;
 
     private TextView mPlaceAttribution;
 
@@ -58,7 +69,10 @@ public class SendFragment extends Fragment  implements PlaceSelectionListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-   View x = inflater.inflate(R.layout.fragment_send, container, false);
+
+        defaultClient = new TransportApiClient(new TransportApiClientSettings(clientId, clientSecret));
+
+        View x = inflater.inflate(R.layout.fragment_send, container, false);
         mDatabase = FirebaseDatabase.getInstance().getReference("deliveries");
    btn_esitmate = (Button)x.findViewById(R.id.btn_pricing);
    autocompleteFragment1 = (PlaceAutocompleteFragment) getActivity().
@@ -109,10 +123,17 @@ public class SendFragment extends Fragment  implements PlaceSelectionListener {
             public void onClick(View v) {
                 if ( ! pick_co.equals(null)  &&  !drop_co.equals(null)){
 
+
+                    TransportApiResult<Journey> journey = defaultClient.postJourney(JourneyBodyOptions.defaultQueryOptions(), pick_co.latitude, pick_co.longitude, drop_co.latitude, drop_co.longitude, "");
+
+                    List<List<Double>> response = journey.data.getItineraries().get(0).getLegs().get(0).getGeometry().getCoordinates();
+
                     mDatabase.push().setValue(
                             new Deliveries(pick_co ,drop_co , pickup ,dropoff));
                   //  mDatabase.child(KEY).setValue( new Deliveries(pick_co , drop_co) );
                     Log.d("Key " , mDatabase.getKey());
+                    Log.d("Coord: ",String.valueOf(response));
+
                     Intent in = new Intent( getActivity() , Main2Activity.class);
                     in.putExtra("key" , mDatabase.getKey());
                     startActivity(in);
